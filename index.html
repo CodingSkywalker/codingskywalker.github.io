@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <style>
-    /* Smooth Scroll */
     html {
       scroll-behavior: smooth;
     }
@@ -21,7 +20,6 @@
       color: #222;
     }
 
-    /* Navbar */
     .navbar {
       background-color: #003262;
     }
@@ -33,13 +31,13 @@
       color: #aad8ff !important;
     }
 
-    /* Hero */
     .hero {
       padding: 80px 10%;
       background: linear-gradient(90deg, #003262, #005b96);
       color: #fff;
     }
-    .profile-img {
+    .hero .profile-img {
+      width: 100%;
       max-width: 380px;
       max-height: 350px;
       border-radius: 10px;
@@ -47,7 +45,6 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
 
-    /* Section Titles */
     h2.section-title {
       text-align: center;
       margin: 60px 0 30px;
@@ -55,7 +52,6 @@
       color: #003262;
     }
 
-    /* About */
     #about {
       background: #fff;
       padding: 40px 10%;
@@ -63,30 +59,23 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
-    /* Cards */
     .card {
-      border: none;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      border: none;
+      transition: 0.3s;
     }
     .card:hover {
       transform: translateY(-5px);
     }
 
-    /* Card link reset */
     .card-link {
       text-decoration: none;
       color: inherit;
     }
-    .card-link:hover {
-      text-decoration: none;
-      color: inherit;
-    }
 
-    /* Contact */
     #contact {
       background-color: #003262;
-      color: #fff;
+      color: white;
       padding: 50px 10%;
       text-align: center;
     }
@@ -97,18 +86,6 @@
     #contact img {
       width: 30px;
       margin: 10px;
-    }
-
-    /* ===== Simple Animations ===== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-up.show {
-      opacity: 1;
-      transform: translateY(0);
     }
   </style>
 </head>
@@ -130,43 +107,54 @@
 </nav>
 
 <!-- Hero -->
-<section class="hero fade-up">
+<section class="hero">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-md-5 mb-4">
+      <div class="col-md-5 mb-4 mb-md-0">
         <img src="img/Pandey_Akshat_.jpg" alt="Akshat Pandey" class="img-fluid profile-img">
       </div>
-      <div class="col-md-7">
-        <h1>Akshat Pandey</h1>
-        <h4>Computer Science Student at UMass Boston</h4>
+      <div class="col-md-7 text-left">
+        <h1 class="mb-3">Akshat Pandey</h1>
+        <h4 class="text-light">Computer Science Student at UMass Boston</h4>
         <p class="lead mt-3">
-          Pursuing a <strong>B.S. in Computer Science</strong> at the University of Massachusetts Boston.
-          Graduate of <strong>Braintree High School</strong>.
+          I’m currently pursuing a <strong>B.S. in Computer Science</strong> at the
+          <strong>University of Massachusetts Boston</strong>.
+          I graduated from <strong>Braintree High School</strong> in Braintree, Massachusetts.
+          I’m passionate about software development, machine learning, and AI-driven technologies.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- About -->
-<section id="about" class="container fade-up">
+<!-- About Me -->
+<section id="about" class="container">
   <h2 class="section-title">About Me</h2>
-  <p>
-    I’m a Computer Science undergraduate focused on machine learning and emerging AI technologies.
-    My primary programming language is <strong>Python</strong>.
+
+  <p align="justify">
+    I’m a Computer Science undergraduate at the University of Massachusetts Boston with a strong interest in
+    software design, machine learning, and emerging AI technologies. My main programming language is
+    <strong>Python</strong>, and I enjoy using it for solving problems, exploring data, and building
+    creative tech-driven solutions.
   </p>
-  <p>
-    I actively practice <strong>Software Composing</strong> which combines Generative AI tools with
-    traditional programming workflows to build projects efficiently, creatively, and productively.
+
+  <p align="justify">
+    I’m also deeply involved in the new era of <strong>Software Composing</strong>, which uses Generative AI tools
+    with traditional programming workflows to build projects more effectively and creatively.
+    I understand how to combine AI-assisted development with real-world programming practices to
+    accelerate development, boost productivity, and create innovative results.
   </p>
-  <p>
-    My long-term goal is to become a <strong>Machine Learning Engineer</strong> and an <strong>entrepreneur</strong>,
-    developing intelligent systems for the <strong>renewable and sustainable energy sector</strong>.
+
+  <p align="justify">
+    My long-term goal is to become a <strong>Machine Learning Engineer</strong> and an
+    <strong>entrepreneur</strong>, leveraging machine learning and technology to develop intelligent systems
+    in the <strong>renewable and sustainable energy sector</strong>, improving efficiency and enabling
+    large-scale adoption worldwide.
   </p>
 </section>
 
-<!-- Resume & Certifications -->
-<section id="certifications" class="container mt-5 fade-up">
+<!-- Resume, Certifications & Recommendation -->
+<section id="certifications" class="container mt-5">
   <h2 class="section-title">Resume, Certifications & Recommendation</h2>
   <div class="row justify-content-center">
 
@@ -176,33 +164,45 @@
         <div class="card text-center">
           <img src="./img/resume_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
           <div class="card-body">
-            <h5>My Resume</h5>
+            <h5 class="card-title">My Resume</h5>
+            <p class="card-text">
+              My resume highlights my academic background, technical skills, and hands-on experience
+              in computer science, machine learning, and technology-focused projects.
+            </p>
             <button class="btn btn-outline-primary">View Resume</button>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- ML Cert -->
+    <!-- ML Certificate -->
     <div class="col-md-4 mb-4">
       <a href="./pdfs/aws_certificate_ml.pdf" target="_blank" class="card-link">
         <div class="card text-center">
           <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
           <div class="card-body">
-            <h5>AWS: Intro to Machine Learning</h5>
+            <h5 class="card-title">AWS: Introduction to Machine Learning</h5>
+            <p class="card-text">
+              This certification demonstrates my foundational understanding of machine learning concepts,
+              data-driven problem solving, and real-world ML applications using AWS tools.
+            </p>
             <button class="btn btn-outline-primary">View Certificate</button>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- GenAI Cert -->
+    <!-- Gen AI Certificate -->
     <div class="col-md-4 mb-4">
       <a href="./pdfs/aws_certificate_genai.pdf" target="_blank" class="card-link">
         <div class="card text-center">
           <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
           <div class="card-body">
-            <h5>AWS: Intro to Generative AI</h5>
+            <h5 class="card-title">AWS: Introduction to Generative AI</h5>
+            <p class="card-text">
+              This certification covers core concepts of generative AI, including large language models,
+              prompt engineering, and practical applications of AI-powered tools.
+            </p>
             <button class="btn btn-outline-primary">View Certificate</button>
           </div>
         </div>
@@ -215,7 +215,12 @@
         <div class="card text-center">
           <img src="./img/letter_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
           <div class="card-body">
-            <h5>Recommendation Letter</h5>
+            <h5 class="card-title">Recommendation Letter</h5>
+            <p class="card-text">
+              A professional letter of recommendation from <strong>Jon Brace</strong>, Head of the
+              Braintree High School Technology Department, highlighting my technical abilities,
+              responsibility, teamwork, and contributions as a Tech Intern.
+            </p>
             <button class="btn btn-outline-primary">View Letter</button>
           </div>
         </div>
@@ -226,7 +231,7 @@
 </section>
 
 <!-- Contact -->
-<section id="contact" class="fade-up">
+<section id="contact">
   <h2>Contact Me</h2>
   <p>📧 <a href="mailto:qatoakshat@gmail.com">qatoakshat@gmail.com</a></p>
   <p>📍 Boston, Massachusetts</p>
@@ -234,21 +239,6 @@
     <img src="img/github.png" alt="GitHub">
   </a>
 </section>
-
-<!-- Simple JS for animations -->
-<script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  });
-
-  document.querySelectorAll('.fade-up').forEach(section => {
-    observer.observe(section);
-  });
-</script>
 
 </body>
 </html>
