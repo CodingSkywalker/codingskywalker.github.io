@@ -1,286 +1,665 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Akshat Pandey | Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akshat Pandey | Portfolio</title>
 
-  <!-- Bootstrap & Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-  <style>
-    html { scroll-behavior: smooth; }
+<style>
+:root {
+  --bg:           #080d14;
+  --surface:      #0d1520;
+  --surface2:     #111d2e;
+  --border:       rgba(0, 200, 255, 0.12);
+  --border-hover: rgba(0, 200, 255, 0.35);
+  --cyan:         #00c8ff;
+  --cyan-dim:     rgba(0, 200, 255, 0.15);
+  --cyan-glow:    rgba(0, 200, 255, 0.08);
+  --green:        #00ffb3;
+  --text:         #e2eaf4;
+  --muted:        #6b8aaa;
+  --mono:         'Space Mono', monospace;
+  --sans:         'Sora', sans-serif;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f5f7fa;
-      color: #222;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .navbar {
-      background-color: #003262;
-    }
-    .navbar-brand, .nav-link {
-      color: #ffffff !important;
-      font-weight: 500;
-    }
-    .nav-link:hover {
-      color: #aad8ff !important;
-    }
+html { scroll-behavior: smooth; }
 
-    .hero {
-      padding: 80px 10%;
-      background: linear-gradient(90deg, #003262, #005b96);
-      color: #fff;
-    }
-    .hero .profile-img {
-      width: 100%;
-      max-width: 380px;
-      max-height: 350px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-    h2.section-title {
-      text-align: center;
-      margin: 60px 0 30px;
-      font-weight: 700;
-      color: #003262;
-    }
+/* ── GRID TEXTURE ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    #about {
-      background: #fff;
-      padding: 40px 10%;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
+/* ── SCANLINE OVERLAY ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.06) 2px,
+    rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .card {
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border: none;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
+/* ── NAV ── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(8, 13, 20, 0.88);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 1rem;
+}
 
-    .card-link {
-      text-decoration: none;
-      color: inherit;
-    }
+.navbar-brand {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--cyan) !important;
+  letter-spacing: 0.02em;
+}
 
-    #contact {
-      background-color: #003262;
-      color: white;
-      padding: 50px 10%;
-      text-align: center;
-    }
-    #contact a {
-      color: #aad8ff;
-      text-decoration: none;
-    }
-    #contact img {
-      width: 30px;
-      margin: 10px;
-    }
-  </style>
+.navbar-brand::before { content: "> "; opacity: 0.5; }
+
+.nav-link {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--muted) !important;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+  padding: 0.4rem 0.9rem !important;
+}
+
+.nav-link:hover { color: var(--cyan) !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0 100px;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,179,0.05) 0%, transparent 70%);
+  bottom: -100px;
+  left: 5%;
+  pointer-events: none;
+}
+
+/* Center Align the Hero Copy */
+.hero-copy { 
+  animation: fade-up 0.7s ease both; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  border: 1px solid var(--border);
+  background: var(--cyan-dim);
+  border-radius: 4px;
+  padding: 0.35rem 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-family: var(--sans);
+  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  min-height: 2.2em; /* Prevents shifting during typing animation */
+}
+
+/* Typing Effect Classes */
+.cyan-text { color: var(--cyan); position: relative; }
+.cursor {
+  color: var(--cyan);
+  font-weight: 400;
+  animation: blink 1s step-start infinite;
+  margin-left: 2px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero h4 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 32rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.hero-pill {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--cyan);
+  letter-spacing: 0.05em;
+}
+
+.hero-pill::before { content: "# "; opacity: 0.5; }
+
+/* ── SECTION WRAPPER ── */
+.section-wrap {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 80px;
+}
+
+.section-shell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 52px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-shell::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: center;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ── ABOUT ── */
+#about .section-shell p {
+  color: var(--muted);
+  font-size: 1.02rem;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 1.1rem;
+}
+
+#about .section-shell p:last-child { margin-bottom: 0; }
+
+/* ── CARDS ── */
+.cert-card-col { display: flex; }
+
+.card-link, .card-link:hover { text-decoration: none; color: inherit; }
+
+.document-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1.75rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.document-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0,200,255,0.06), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.document-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 200, 255, 0.08);
+}
+
+.document-card:hover::after { opacity: 1; }
+
+.card-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+
+.card-icon-wrap img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.document-card h5 {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
+.document-card p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+  flex-grow: 1;
+  margin-bottom: 1.4rem;
+}
+
+.btn-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--cyan);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--cyan);
+  transition: background 0.25s, color 0.25s;
+}
+
+.document-card:hover .btn-custom {
+  background: var(--cyan);
+  color: var(--bg);
+}
+
+/* hackathon card special accent */
+.card-hackathon { border-color: rgba(0,255,179,0.18); }
+.card-hackathon .card-icon-wrap { background: rgba(0,255,179,0.1); border-color: rgba(0,255,179,0.2); }
+.card-hackathon .btn-custom { border-color: var(--green); color: var(--green); }
+.card-hackathon:hover { border-color: rgba(0,255,179,0.4); box-shadow: 0 20px 40px rgba(0,255,179,0.07); }
+.card-hackathon:hover .btn-custom { background: var(--green); color: var(--bg); }
+.card-hackathon::after {
+  background: radial-gradient(circle at 50% 0%, rgba(0,255,179,0.06), transparent 70%);
+}
+
+/* stagger animation */
+.cert-card-col { animation: fade-up 0.6s ease both; }
+.cert-card-col:nth-child(1) { animation-delay: 0.05s; }
+.cert-card-col:nth-child(2) { animation-delay: 0.10s; }
+.cert-card-col:nth-child(3) { animation-delay: 0.15s; }
+.cert-card-col:nth-child(4) { animation-delay: 0.20s; }
+.cert-card-col:nth-child(5) { animation-delay: 0.25s; }
+.cert-card-col:nth-child(6) { animation-delay: 0.30s; }
+.cert-card-col:nth-child(7) { animation-delay: 0.35s; }
+.cert-card-col:nth-child(8) { animation-delay: 0.40s; }
+
+/* ── CONTACT ── */
+#contact {
+  position: relative;
+  z-index: 1;
+  padding: 80px 1.5rem 80px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+#contact::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+#contact h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.contact-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.contact-link {
+  color: var(--cyan);
+  font-weight: 600;
+}
+.contact-link:hover { color: var(--green); text-decoration: none; }
+
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.social-icon:hover {
+  border-color: var(--cyan);
+  transform: translateY(-4px);
+}
+
+.social-icon img {
+  width: 22px; height: 22px;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 991.98px) {
+  .hero { padding: 80px 0; }
+  .hero h1 { font-size: 2.8rem; }
+}
+
+@media (max-width: 767.98px) {
+  .section-shell { padding: 36px 24px; }
+  .hero h1 { font-size: 2.4rem; }
+}
+</style>
 </head>
-
 <body>
 
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#">Akshat Pandey</a>
-    <div class="collapse navbar-collapse justify-content-end">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+    <a class="navbar-brand">akshat_pandey</a>
+    <div class="ml-auto d-flex align-items-center">
+      <a class="nav-link" href="#about">about</a>
+      <a class="nav-link" href="#certifications">certifications</a>
+      <a class="nav-link" href="#contact">contact</a>
     </div>
   </div>
 </nav>
 
-<!-- Hero -->
 <section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-5 mb-4 mb-md-0">
-        <img src="img/Pandey_Akshat_.jpg" alt="Akshat Pandey" class="img-fluid profile-img">
-      </div>
-      <div class="col-md-7">
-        <h1 class="mb-3">Akshat Pandey</h1>
-        <h4 class="text-light">Computer Science Student at UMass Boston</h4>
-        <p class="lead mt-3">
-          I’m currently pursuing a <strong>B.S. in Computer Science</strong> at the
-          <strong>University of Massachusetts Boston</strong>. I graduated from
-          <strong>Braintree High School</strong> in Braintree, Massachusetts.
-        </p>
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-10">
+        <div class="hero-copy">
+          <span class="hero-tag">// portfolio</span>
+          <h1 id="typed-name"></h1>
+          <h4>Computer Science Student &nbsp;|&nbsp; AI Enthusiast</h4>
+          <p class="hero-desc">Building practical projects across machine learning, Python, and generative AI — focused on clear execution and long-term impact.</p>
+          <div class="hero-pills">
+            <span class="hero-pill">machine_learning</span>
+            <span class="hero-pill">python</span>
+            <span class="hero-pill">generative_ai</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- About -->
-<section id="about" class="container">
-  <h2 class="section-title">About Me</h2>
-
-  <p align="justify">
-    I’m a Computer Science undergraduate at the University of Massachusetts Boston with a strong interest in
-    machine learning and emerging AI technologies. My main programming language is <strong>Python</strong>.
-  </p>
-
-  <p align="justify">
-    I actively practice <strong>Software Composing</strong>, combining Generative AI tools with traditional
-    programming workflows to accelerate development, boost productivity, and create innovative results.
-  </p>
-
-  <p align="justify">
-    My long-term goal is to become a <strong>Machine Learning Engineer</strong> and
-    <strong>entrepreneur</strong>, developing intelligent systems in the renewable and sustainable energy sector.
-  </p>
-</section>
-
-<!-- Certifications -->
-<section id="certifications" class="container mt-5">
-  <h2 class="section-title">Resume, Certifications & Recommendation</h2>
-  <div class="row justify-content-center">
-
-    <!-- Resume -->
-    <div class="col-md-4 mb-4">
-      <a href="./pdfs/akshat_resume.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/resume_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">My Resume</h5>
-            <p class="card-text">
-              My academic background, technical skills, and hands-on experience
-              in computer science, machine learning, and AI-driven technologies.
-            </p>
-            <button class="btn btn-outline-primary">View Resume</button>
-          </div>
-        </div>
-      </a>
+<section id="about" class="section-wrap">
+  <div class="container">
+    <div class="section-shell">
+      <span class="section-label">01 // about</span>
+      <h2 class="section-title">About Me</h2>
+      <p>
+        I'm a Computer Science undergraduate at the University of Massachusetts Boston with a strong interest in machine learning and emerging AI technologies. My main programming language is Python.
+      </p>
+      <p>
+        I actively practice Software Composing — combining Generative AI tools with traditional programming workflows to accelerate development, boost productivity, and create innovative results.
+      </p>
+      <p>
+        My long-term goal is to become a Machine Learning Engineer and entrepreneur, developing intelligent systems in the renewable and sustainable energy sector.
+      </p>
     </div>
-
-    <!-- AWS Machine Learning -->
-    <div class="col-md-4 mb-4">
-      <a href="./pdfs/aws_certificate_ml.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">AWS: Introduction to Machine Learning</h5>
-            <p class="card-text">
-              Demonstrates foundational knowledge of machine learning concepts,
-              data-driven problem solving, and real-world ML applications.
-            </p>
-            <button class="btn btn-outline-primary">View Certificate</button>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- AWS Generative AI -->
-    <div class="col-md-4 mb-4">
-      <a href="./pdfs/aws_certificate_genai.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">AWS: Introduction to Generative AI</h5>
-            <p class="card-text">
-              Covers core concepts of generative AI, including large language models,
-              prompt engineering, and AI-assisted development workflows.
-            </p>
-            <button class="btn btn-outline-primary">View Certificate</button>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Udemy Python -->
-    <div class="col-md-4 mb-4">
-      <a href="./pdfs/UDEMY Python Certification.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">Python Programming (Udemy)</h5>
-            <p class="card-text">
-              Demonstrates strong proficiency in Python programming,
-              problem solving, and applied software development.
-            </p>
-            <button class="btn btn-outline-primary">View Certificate</button>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- NVIDIA AI for All -->
-    <div class="col-md-4 mb-4">
-      <a href="./pdfs/NVDIA AI for All - Course Completion Certificate.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">NVIDIA: AI for All</h5>
-            <p class="card-text">
-              Explores AI fundamentals, generative AI concepts,
-              and real-world applications of artificial intelligence.
-            </p>
-            <button class="btn btn-outline-primary">View Certificate</button>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- EDGE AI -->
-    <div class="col-md-4 mb-4">
-      <a href="./pdfs/FA25-EDGE-AI-Certificate-of-Completion.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/certificate_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">EDGE AI Program</h5>
-            <p class="card-text">
-              Hands-on exposure to applied AI systems,
-              problem solving, and real-world machine learning workflows.
-            </p>
-            <button class="btn btn-outline-primary">View Certificate</button>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Recommendation Letter -->
-    <div class="col-md-6 mb-4">
-      <a href="./pdfs/recommendation_letter_jon_brace.pdf" target="_blank" class="card-link">
-        <div class="card text-center">
-          <img src="./img/letter_icon.png" class="card-img-top p-3" style="height:180px;object-fit:contain;">
-          <div class="card-body">
-            <h5 class="card-title">Recommendation Letter</h5>
-            <p class="card-text">
-              A professional recommendation from <strong>Jon Brace</strong>,
-              Head of the Braintree High School Technology Department,
-              highlighting my technical skills, responsibility, and teamwork.
-            </p>
-            <button class="btn btn-outline-primary">View Letter</button>
-          </div>
-        </div>
-      </a>
-    </div>
-
   </div>
 </section>
 
-<!-- Contact -->
+<section id="certifications" class="section-wrap">
+  <div class="container">
+    <div class="section-shell">
+      <span class="section-label">02 // certifications</span>
+      <h2 class="section-title">Resume & Certifications</h2>
+
+      <div class="row justify-content-center">
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/Akshat_Pandey_Resume.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/resume_icon.png" alt="Resume"></div>
+              <h5>My Resume</h5>
+              <p>Academic background, technical skills, and hands-on experience in computer science, machine learning, and AI-driven technologies.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="https://roadhazardtrackingapp.netlify.app/" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card card-hackathon">
+              <div class="card-icon-wrap"><img src="./img/software_icon.png" alt="Software"></div>
+              <h5>Road Hazard Software</h5>
+              <p>Built and deployed a live crash &amp; road hazard reporting web app in 2 hours at AlcivarTech's VibeCode Victory Games — Microsoft NERD Center, Cambridge, MA — April 2026.</p>
+              <span class="btn-custom">view_software</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/aws_certificate_ml.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/certificate_icon.png" alt="Certificate"></div>
+              <h5>Machine Learning</h5>
+              <p>Demonstrates foundational knowledge of ML concepts and applications.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/aws_certificate_genai.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/certificate_icon.png" alt="Certificate"></div>
+              <h5>Generative AI</h5>
+              <p>LLMs, prompt engineering, and AI-assisted workflows.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/UDEMY Python Certification.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/certificate_icon.png" alt="Certificate"></div>
+              <h5>Python Programming (Udemy)</h5>
+              <p>Strong proficiency in Python programming and software development.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/NVDIA AI for All - Course Completion Certificate.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/certificate_icon.png" alt="Certificate"></div>
+              <h5>NVIDIA: AI for All</h5>
+              <p>AI fundamentals and real-world applications of artificial intelligence.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/FA25-EDGE-AI-Certificate-of-Completion.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/certificate_icon.png" alt="Certificate"></div>
+              <h5>EDGE AI Program</h5>
+              <p>Hands-on exposure to applied AI systems and machine learning workflows.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 cert-card-col">
+          <a href="./pdfs/recommendation_letter_jon_brace.pdf" target="_blank" rel="noopener noreferrer" class="card-link w-100">
+            <div class="document-card">
+              <div class="card-icon-wrap"><img src="./img/letter_icon.png" alt="Letter"></div>
+              <h5>Recommendation Letter</h5>
+              <p>Professional recommendation from Jon Brace highlighting my technical and teamwork skills.</p>
+              <span class="btn-custom">view.pdf</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
-  <h2>Contact Me</h2>
-  <p>📧 <a href="mailto:qatoakshat@gmail.com">qatoakshat@gmail.com</a></p>
-  <p>📍 Boston, Massachusetts</p>
-  <a href="https://github.com/CodingSkywalker" target="_blank">
-    <img src="img/github.png" alt="GitHub">
-  </a>
+  <h2>Let's Connect</h2>
+  <p class="contact-text" style="margin-top:0.5rem;">qatoakshat@gmail.com</p>
+  <p class="contact-text">
+    Greater Boston, MA &nbsp;|&nbsp;
+    <a href="https://www.linkedin.com/in/akshat-pandey-akpand" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+  </p>
+  <div class="contact-icons">
+    <a href="https://github.com/CodingSkywalker" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+      <img src="img/github.png" alt="GitHub">
+    </a>
+    <a href="https://www.linkedin.com/in/akshat-pandey-akpand" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+      <img src="img/linkedin.png" alt="LinkedIn">
+    </a>
+  </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const h1 = document.getElementById("typed-name");
+    const text1 = "Akshat";
+    const text2 = "Pandey";
+    let index1 = 0;
+    let index2 = 0;
+
+    function type() {
+      if (index1 < text1.length) {
+        h1.innerHTML = text1.substring(0, index1 + 1) + '<span class="cursor">_</span>';
+        index1++;
+        setTimeout(type, 100);
+      } else if (index1 === text1.length) {
+        // Line break with cyan span for last name
+        h1.innerHTML = text1 + '<br><span class="cyan-text"></span><span class="cursor">_</span>';
+        index1++;
+        setTimeout(type, 300); // small pause before typing the last name
+      } else if (index2 < text2.length) {
+        const span = h1.querySelector('.cyan-text');
+        span.textContent += text2.charAt(index2);
+        index2++;
+        setTimeout(type, 100);
+      }
+    }
+    
+    // Start animation a brief moment after load for visual impact
+    setTimeout(type, 400); 
+  });
+</script>
 
 </body>
 </html>
